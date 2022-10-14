@@ -1,8 +1,24 @@
 import express from 'express';
+//__dirname for esm 
+import path from 'path';
+import {fileURLToPath} from 'url';
 const app = express();
+// instead of body-parser
+app.use(express.urlencoded({extended: true})); 
+app.use(express.json());
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.get("/", (req,res) => {
-  res.send("Hello there");
+  const today = new Date();
+  if ([0,6].indexOf(today.getDay()) > -1 ){
+    res.send("Yay it's the weekend!");
+  }
+  else{
+    // res.send("Sorry its a normal working day, Get back to work!");
+    res.sendFile(__dirname + "/index.html");
+  }
 });
 
 app.listen(process.env.PORT || 3000, () => console.log("Server is running"));
