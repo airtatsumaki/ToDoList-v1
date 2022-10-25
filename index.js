@@ -12,22 +12,20 @@ app.set('view engine', 'ejs');
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+let items = ["Do stuff","eat stuff","break stuff"];
+
 app.get("/", (req,res) => {
-  const today = new Date();
-  const dayObj = {};
-  const daysOfTheWeek =  ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  dayObj["today"] = daysOfTheWeek[today.getDay()];
-  // if ([0,6].indexOf(today.getDay()) > -1 ){
-  //   //res.send("Yay it's the weekend!");
-  //   dayObj["message"] = "Yay it's the weekend!";
-  // }
-  // else{
-  //   // res.send("Sorry its a normal working day, Get back to work!");
-  //   // res.sendFile(__dirname + "/index.html");
-  //   dayObj["message"] = "Sorry its a normal working day, Get back to work!";
-  //   //res.render("pages/index");
-  // }
-  res.render("pages/index", {theDay: dayObj});
+  const myDate = new Date();
+  const options = { weekday: 'long', month: 'long', day: 'numeric' };
+  const today = myDate.toLocaleDateString('en-GB', options);
+  res.render("pages/index", {theDate: today, todolist: items});
 });
 
-app.listen(process.env.PORT || 3000, () => console.log("Server is running"));
+app.post("/", (req, res) => {
+  if (req.body.task.trim() !== ""){
+    items.push(req.body.task);
+  }
+  res.redirect("/");
+});
+
+app.listen(process.env.PORT || 3000, () => console.log("Server is running on port 3000"));

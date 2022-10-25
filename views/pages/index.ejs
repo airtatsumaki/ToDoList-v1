@@ -7,6 +7,17 @@
   <title>To Do List</title>
 </head>
 <body>
-  <h1>Today is a <%= theDay.today %></h1>
+  <h1><%= theDate %></h1>
+  <ul>
+    <% for(let x = 0; x < todolist.length; x++){ %>
+      <li><%= todolist[x] %></li>
+    <% } %>
+  </ul>
+  <form action="/" method="post">
+    <input type="text" name="task" id="task">
+    <button type="submit">Add</button>
+  </form>
+
+
 </body>
 </html>
