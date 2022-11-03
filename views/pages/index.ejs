@@ -7,17 +7,27 @@
   <link rel="stylesheet" href="css/styles.css">
   <title>To Do List</title>
 </head>
+
 <body>
-  <h1><%= theDate %></h1>
-  <ul>
+  <div class="box">
+    <h1 id="heading"><%= theDate %></h1>
+  </div>
+
+  <div class="box">
     <% for(let x = 0; x < todolist.length; x++){ %>
-      <li><%= todolist[x] %></li>
+      <div class="item">
+        <input type="checkbox">
+        <p><%= todolist[x] %></p>
+      </div>
     <% } %>
-  </ul>
-  <form action="/" method="post">
-    <input type="text" name="task" id="task">
-    <button type="submit">Add</button>
-  </form>
+
+    <form class="item" action="/" method="post">
+      <input type="text" name="task" id="task" placeholder="New Item" autocomplete="off">
+      <button type="submit">+</button>
+    </form>
+  </div>
+
+  
 
 
 </body>
