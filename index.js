@@ -2,6 +2,9 @@ import express from 'express';
 //__dirname for esm 
 import path from 'path';
 import {fileURLToPath} from 'url';
+// since getDate is exported as default we can't use a named export import {functionName} from "./date.js";
+import getDate from "./date.js";
+
 const app = express();
 // instead of body-parser
 app.use(express.urlencoded({extended: true})); 
@@ -17,10 +20,7 @@ let items = ["Do stuff","eat stuff","break stuff"];
 let workList = [];
 
 app.get("/", (req,res) => {
-  const myDate = new Date();
-  const options = { weekday: 'long', month: 'long', day: 'numeric' };
-  const today = myDate.toLocaleDateString('en-GB', options);
-  res.render("pages/index", {title: today, todolist: items, action: "/"});
+  res.render("pages/index", {title: getDate(), todolist: items, action: "/"});
 });
 
 app.get("/work", (req,res) => {
