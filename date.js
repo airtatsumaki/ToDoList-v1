@@ -1,7 +1,11 @@
-export default function getDate(){
+export function getDate(){
   const myDate = new Date();
   const options = { weekday: 'long', month: 'long', day: 'numeric' };
-  const today = myDate.toLocaleDateString('en-GB', options);
+  return myDate.toLocaleDateString('en-GB', options);
+}
 
-  return today;
+export function getDay(){
+  const myDate = new Date();
+  const options = { weekday: 'long'};
+  return myDate.toLocaleDateString('en-GB', options);
 }

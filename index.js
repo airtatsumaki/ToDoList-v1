@@ -3,7 +3,7 @@ import express from 'express';
 import path from 'path';
 import {fileURLToPath} from 'url';
 // since getDate is exported as default we can't use a named export import {functionName} from "./date.js";
-import getDate from "./date.js";
+import {getDate, getDay} from "./date.js";
 
 const app = express();
 // instead of body-parser
@@ -20,6 +20,7 @@ let items = ["Do stuff","eat stuff","break stuff"];
 let workList = [];
 
 app.get("/", (req,res) => {
+  console.log(getDay());
   res.render("pages/index", {title: getDate(), todolist: items, action: "/"});
 });
 
